@@ -1,0 +1,23 @@
+{
+  "name": "JS 集中力・記憶力向上訓練",
+  "short_name": "JS訓練",
+  "description": "視力強化・集中力・記憶力・文章記憶・読解力向上の5種類の脳トレアプリ。",
+  "start_url": "/jpn/index.html",
+  "scope": "/jpn/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#1a1a1a",
+  "theme_color": "#6699CC",
+  "lang": "ja-JP",
+  "categories": ["education", "health", "lifestyle"],
+  "icons": [
+    { "src": "/jpn/icons/icon-72.png",   "sizes": "72x72",   "type": "image/png", "purpose": "any maskable" },
+    { "src": "/jpn/icons/icon-96.png",   "sizes": "96x96",   "type": "image/png", "purpose": "any maskable" },
+    { "src": "/jpn/icons/icon-128.png",  "sizes": "128x128", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/jpn/icons/icon-144.png",  "sizes": "144x144", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/jpn/icons/icon-152.png",  "sizes": "152x152", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/jpn/icons/icon-192.png",  "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/jpn/icons/icon-384.png",  "sizes": "384x384", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/jpn/icons/icon-512.png",  "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
