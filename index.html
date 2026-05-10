@@ -792,7 +792,7 @@ function renderLsList() {
     <div class="lsItem">
       <div>
         <span style="font-size:12px;font-weight:500;">${k}</span><br>
-        <span style="font-size:11px;color:#888;">낱말 ${(sheetsData[k].wordPool||[]).length.toLocaleString()}개 · 문장 ${(sheetsData[k].sentPool||[]).length.toLocaleString()}개</span>
+        <span style="font-size:11px;color:#888;">낱말 ${(sheetsData[k].wordPool||[]).length.toLocaleString()}개 · 文章 ${(sheetsData[k].sentPool||[]).length.toLocaleString()}文</span>
       </div>
       <button onclick="removeDS('${k}')">削除</button>
     </div>`).join('');
@@ -1300,9 +1300,9 @@ function setOv(t,n,w,s,b) {
 function showRestOv(isLast) {
   showOvMsg();
   setOv(
-    isLast?'모든 훈련이 完了しました':'잠시 눈을 감고 쉬어주세요',
+    isLast?'すべての訓練が完了しました':'しばらく目を閉じて休んでください',
     REST, null,
-    isLast?'10초 후 종료됩니다':'10秒後に '+PH[phase+1].label+'が始まります',
+    isLast?'10秒後に終了します':'10秒後に '+PH[phase+1].label+'が始まります',
     null
   );
   OV.style.display='flex';
@@ -1320,8 +1320,8 @@ function showRestOv(isLast) {
 function showThink() {
   showOvMsg();
   const isRD=TM==='memory'||TM==='sentence';
-  const lbl=isRD?'ラウンド '+(mRound+1)+'/'+TOTAL_RDS:'단계 '+(phase+1)+'/3';
-  setOv('잠시 눈을 감고 생각하세요', REST, null, lbl, null);
+  const lbl=isRD?'ラウンド '+(mRound+1)+'/'+TOTAL_RDS:'段階 '+(phase+1)+'/3';
+  setOv('しばらく目を閉じて考えてください', REST, null, lbl, null);
   OV.style.display='flex';
   let s=REST;
   riId=setInterval(() => {
@@ -1339,7 +1339,7 @@ function showWrite() {
       '次の単語は何番目に出ましたか？', '',
       qData?'"'+qData.word+'"':'',
       isLast?'すべてのラウンドが完了しました':'準備ができたら次のラウンドをスタートしてください',
-      isLast?'正解確認':'다음 라운드 →'
+      isLast?'正解確認':'次のラウンド →'
     );
   } else {
     setOv('単語を書いてみましょう','','',
@@ -1434,7 +1434,7 @@ function showAnswers() {
   });
 
   if (isS) {
-    qlTitle.textContent='질문 단어 목록'; qlTitle.style.display='block';
+    qlTitle.textContent='問題単語リスト'; qlTitle.style.display='block';
     allRoundData.forEach((rd,i) => {
       if (!rd) return;
       const row=document.createElement('div');
@@ -1447,7 +1447,7 @@ function showAnswers() {
       chip.textContent='"'+(rd.quiz?.word||'')+'"';
       const ans=document.createElement('span');
       ans.style.cssText='font-size:11px;color:rgba(255,255,255,.5);';
-      ans.textContent='→ '+((rd.quiz?.sentIdx||0)+1)+'번 문장';
+      ans.textContent='→ '+((rd.quiz?.sentIdx||0)+1)+'番目の文';
       row.appendChild(l); row.appendChild(chip); row.appendChild(ans); qlEl.appendChild(row);
     });
   }
@@ -1467,7 +1467,7 @@ function handleEnd() {
     fmSpans.forEach(sp=>{sp.className='fm-w';});
     showAd(()=>{
       document.getElementById('fmCompleteOV').style.display='flex';
-      document.getElementById('fmCompInfo').textContent=fmChapter?`${fmPageIdx+1}/${fmChapter.pages.length} 페이지까지 읽음`:'';
+      document.getElementById('fmCompInfo').textContent=fmChapter?`${fmPageIdx+1}/${fmChapter.pages.length} ページまで読了`:'';
     });
     return;
   }
@@ -1491,12 +1491,12 @@ function updB() {
 }
 function updMB() {
   document.getElementById('ba').textContent='ラウンド '+(mRound+1)+'/'+TOTAL_RDS;
-  document.getElementById('bb').textContent='단어 '+roundWords.length+'個';
-  document.getElementById('bc').textContent='회차 '+Math.min(mCycle+1,MEM_CYCLES)+'/'+MEM_CYCLES;
+  document.getElementById('bb').textContent='単語 '+roundWords.length+'個';
+  document.getElementById('bc').textContent='回 '+Math.min(mCycle+1,MEM_CYCLES)+'/'+MEM_CYCLES;
 }
 function updSB() {
   document.getElementById('ba').textContent='ラウンド '+(mRound+1)+'/'+TOTAL_RDS;
-  document.getElementById('bb').textContent='문장 '+wl+'個';
+  document.getElementById('bb').textContent='文章 '+wl+'個';
   document.getElementById('bc').textContent=(curSentIdx+1)+'/'+wl+'番';
 }
 function updTimerB() {
@@ -1533,7 +1533,7 @@ function updPhUI() {
     document.getElementById('bc').style.borderColor='#4477AA';
   } else {
     document.getElementById('ba').textContent='ラウンド —/'+TOTAL_RDS;
-    document.getElementById('bb').textContent='문장 '+wl+'個';
+    document.getElementById('bb').textContent='文章 '+wl+'個';
     document.getElementById('bc').textContent='— / —';
     document.getElementById('bc').style.color='#111';
     document.getElementById('bc').style.borderColor='#4477AA';
@@ -1697,7 +1697,7 @@ document.addEventListener('keydown', e => {
   /* スペースバー → 次ラウンド / 正解確認 / スタート·再開 */
   if (e.key===' ' || e.code==='Space') {
     e.preventDefault();
-    /* writing 상태: 다음 라운드 또는 정답 확인 버튼 역할 */
+    /* writing状態: 次のラウンドまたは正解確認ボタンの役割 */
     if (tState==='writing') { handleOvBtn(); return; }
     /* idle/paused状態: スタートまたは再開 */
     if (tState==='idle' || tState==='paused') { toggleStart(); return; }
